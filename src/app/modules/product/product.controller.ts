@@ -1,10 +1,12 @@
 import { Request, Response } from 'express'
 import productValidationSchema from './product.validation'
 import { bookServices } from './product.services'
+import { ZodError } from 'zod'
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const validationData = await productValidationSchema.parse(req.body)
+
     const result = await bookServices.createProductsIntoDB(validationData)
 
     res.status(200).json({
@@ -13,30 +15,27 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     })
   } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        message: 'Validation failed',
+        success: false,
+        name: (error.name = 'ValidationError'),
+        error: error,
+        Stack: error.stack,
+      })
+    }
     console.log(error)
   }
 }
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.query.searchTerm
-    if (searchTerm) {
-      const result = await bookServices.getAllSearchProductsFromDB(
-        searchTerm as string,
-      )
-      res.status(200).json({
-        success: true,
-        message: `Books matching search term '${searchTerm}' fetched successfully!`,
-        data: result,
-      })
-    } else {
-      const result = await bookServices.getAllProductsFromDB()
-      res.status(200).json({
-        message: 'Books retrieved successfully',
-        success: true,
-        data: result,
-      })
-    }
+    const result = await bookServices.getAllProductsFromDB()
+    res.status(200).json({
+      message: 'Books retrieved successfully',
+      success: true,
+      data: result,
+    })
   } catch (error) {
     console.log(error)
   }
@@ -64,7 +63,7 @@ const updateSingleProducts = async (req: Request, res: Response) => {
     const validationData = await productValidationSchema.parse(updateData)
     const result = await bookServices.updateSingleProductsFromDB(
       productId,
-      validationData,
+      validationData
     )
 
     return res.status(200).json({

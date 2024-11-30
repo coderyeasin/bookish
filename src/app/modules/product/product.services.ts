@@ -43,14 +43,6 @@ const updateSingleProductsFromDB = async (
   )
   return result
 }
-
-const getAllSearchProductsFromDB = async (searchTerm: string) => {
-  const result = await ProductModel.find({
-    name: { $regex: searchTerm, $options: 'i' },
-  })
-  return result
-}
-
 const deleteSingleProductsFromDB = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id })
   return result
@@ -62,5 +54,4 @@ export const bookServices = {
   getSingleProductsFromDB,
   updateSingleProductsFromDB,
   deleteSingleProductsFromDB,
-  getAllSearchProductsFromDB,
 }

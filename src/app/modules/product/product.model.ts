@@ -15,7 +15,11 @@ const productSchema = new Schema<IProduct>(
       type: Number,
       required: true,
     },
-    category: ['Fiction', 'Science', 'SelfDevelopment', 'Poetry', 'Religious'],
+    category: {
+      type: String,
+      enum: ['Fiction', 'Science', 'SelfDevelopment', 'Poetry', 'Religious'],
+      required: true,
+    },
     description: {
       type: String,
       required: true,
@@ -31,7 +35,7 @@ const productSchema = new Schema<IProduct>(
   },
   {
     timestamps: true,
-  },
+  }
 )
 
 export const ProductModel = model<IProduct>('Product', productSchema)

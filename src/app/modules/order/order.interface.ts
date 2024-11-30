@@ -1,9 +1,6 @@
-
-
 export type Order = {
-    email: string;
-    // mongoDB id
-    product: Object;
-    quantity: number;
-    totalPrice: number;
+  email: string
+  product: string
+  quantity: number
+  totalPrice: number
 }

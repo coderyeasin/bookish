@@ -7,16 +7,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.3",
-    "@eslint/js": "^9.10.0",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
     "eslint": "^9.10.0",
     "eslint-plugin-react": "^7.35.2",
     "globals": "^15.9.0",
-    "typescript": "^5.7.2",
+    "typescript": "^5.0.0",
     "typescript-eslint": "^8.4.0"
   },
   "name": "bookish",

@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import { BookProductsRouter } from './app/modules/product/product.route'
+import { BookOrderRouter } from './app/modules/order/order.route'
 
 const app: Application = express()
 
@@ -10,6 +11,7 @@ app.use(cors())
 
 // APIs -Routes
 app.use('/api/products', BookProductsRouter)
+app.use('/api/orders', BookOrderRouter)
 
 // initial message for users
 app.get('/', (req: Request, res: Response) => {
