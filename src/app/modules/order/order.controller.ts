@@ -32,9 +32,8 @@ const createOrder = async (req: Request, res: Response) => {
     await productsData.save()
 
     const orderValidationData = await ordersSchema.parse(orderData)
-    const result = await BookOrdersServices.createOrderIntoDB(
-      orderValidationData
-    )
+    const result =
+      await BookOrdersServices.createOrderIntoDB(orderValidationData)
     res.status(200).json({
       message: 'Order created successfully!',
       success: true,
@@ -42,7 +41,7 @@ const createOrder = async (req: Request, res: Response) => {
     })
   } catch (error) {
     console.log(error)
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: 'An error occurred while creating the order.',
     })
@@ -52,7 +51,7 @@ const createOrder = async (req: Request, res: Response) => {
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     const result = await BookOrdersServices.getAllOrderFromDB()
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: 'Orders retrieved successfully!',
       data: result,

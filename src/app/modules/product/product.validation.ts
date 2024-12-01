@@ -14,7 +14,7 @@ const productValidationSchema = z.object({
     ['Fiction', 'Science', 'SelfDevelopment', 'Poetry', 'Religious'],
     {
       message: 'Product category is required',
-    }
+    },
   ),
   description: z.string().min(1, {
     message: 'Product description is required',

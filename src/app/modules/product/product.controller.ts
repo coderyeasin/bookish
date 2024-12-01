@@ -10,19 +10,20 @@ const createProduct = async (req: Request, res: Response) => {
       const errorMessages = validationData.error.errors.map(issue => ({
         name: 'ValidationError',
         errors: {
-          error: issue,
-          path: issue.path.join('.'),
           message: issue.message,
+          name: 'ValidationError',
+          error: issue,
         },
       }))
-      return res.status(400).json({
+      res.status(400).json({
         message: 'Validation failed',
         success: false,
         error: errorMessages,
         Stack: validationData.error.stack,
       })
     }
-    const result = await BookServices.createProductsIntoDB(validationData.data)
+    const productData = req.body
+    const result = await BookServices.createProductsIntoDB(productData)
 
     res.status(200).json({
       message: 'Book created successfully',
@@ -68,12 +69,13 @@ const updateSingleProducts = async (req: Request, res: Response) => {
     const updateData = req.body
     const validationData =
       await validationSchema.productUpdateValidationSchema.parse(updateData)
+
     const result = await BookServices.updateSingleProductsFromDB(
       productId,
       validationData
     )
 
-    return res.status(200).json({
+    res.status(200).json({
       message: 'Book updated successfully',
       success: true,
       data: result,

@@ -22,7 +22,7 @@ const orderSchema = new Schema<Order>(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 export const OrderModel = model<Order>('order', orderSchema)
