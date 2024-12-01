@@ -19,7 +19,7 @@ const getSingleProductsFromDB = async (id: string) => {
 
 const updateSingleProductsFromDB = async (
   id: string,
-  productData: IProduct,
+  productData: IProduct
 ) => {
   const filterId = { _id: id }
   const options = { new: true }
@@ -39,7 +39,7 @@ const updateSingleProductsFromDB = async (
   const result = await ProductModel.findOneAndUpdate(
     filterId,
     updateDoc,
-    options,
+    options
   )
   return result
 }
@@ -48,7 +48,7 @@ const deleteSingleProductsFromDB = async (id: string) => {
   return result
 }
 
-export const bookServices = {
+export const BookServices = {
   createProductsIntoDB,
   getAllProductsFromDB,
   getSingleProductsFromDB,
