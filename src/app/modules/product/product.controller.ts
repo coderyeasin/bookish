@@ -1,10 +1,11 @@
 import { Request, Response } from 'express'
-import productValidationSchema from './product.validation'
+import { validationSchema } from './product.validation'
 import { BookServices } from './product.services'
 
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const validationData = await productValidationSchema.safeParse(req.body)
+    const validationData =
+      await validationSchema.productValidationSchema.safeParse(req.body)
     if (!validationData.success) {
       const errorMessages = validationData.error.errors.map(issue => ({
         name: 'ValidationError',
@@ -65,7 +66,8 @@ const updateSingleProducts = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params
     const updateData = req.body
-    const validationData = await productValidationSchema.parse(updateData)
+    const validationData =
+      await validationSchema.productUpdateValidationSchema.parse(updateData)
     const result = await BookServices.updateSingleProductsFromDB(
       productId,
       validationData
