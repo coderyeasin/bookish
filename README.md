@@ -108,6 +108,6 @@ npm run lint:fix
 
 ## Deployed
 
-Check it out : [Bookish](https://github.com/coderyeasin/bookish.git).
+Check it out : [Bookish](https://bookish-zeta.vercel.app/).
 
 ## **Happy Journey!**
