@@ -36,7 +36,7 @@ Tech stack: **TypeScript**, **Mongoose**, **Zod**, **Express**, **Es-Lint**,**Pr
 /api/orders
 ```
 
-**Get Total Revenue**
+**Get Total Revenue - using mongoose aggregation**
 
 ```
 /api/orders/revenue
